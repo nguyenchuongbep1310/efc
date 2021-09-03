@@ -31,8 +31,8 @@ namespace efc.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage="phai nhap {0}")]
+            [EmailAddress(ErrorMessage="Sai dinh dang")]
             public string Email { get; set; }
         }
 

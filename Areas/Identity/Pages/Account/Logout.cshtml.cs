@@ -37,7 +37,10 @@ namespace efc.Areas.Identity.Pages.Account
             }
             else
             {
-                return RedirectToPage();
+                // return RedirectToPage();
+                returnUrl = Url.Content("~/");
+                return LocalRedirect(returnUrl);
+
             }
         }
     }
