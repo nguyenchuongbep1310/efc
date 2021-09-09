@@ -69,16 +69,17 @@ namespace efc.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnGetCallbackAsync(string returnUrl = null, string remoteError = null)
         {
+    
             returnUrl = returnUrl ?? Url.Content("~/");
             if (remoteError != null)
             {
-                ErrorMessage = $"Error from external provider: {remoteError}";
+                ErrorMessage = $"Loi tu dich vu ngoai: {remoteError}";
                 return RedirectToPage("./Login", new {ReturnUrl = returnUrl });
             }
             var info = await _signInManager.GetExternalLoginInfoAsync();
             if (info == null)
             {
-                ErrorMessage = "Error loading external login information.";
+                ErrorMessage = "khong lay duoc thong tin tu dich vu ngoai";
                 return RedirectToPage("./Login", new { ReturnUrl = returnUrl });
             }
 
@@ -122,6 +123,45 @@ namespace efc.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
+                //Input.Email
+
+                // var registeredUser = await _userManager.FindByEmailAsync(Input.Email);
+                // string externalEmail= null;
+
+                // AppUser externalEmailUser = null;
+
+                // // Claim ~ dac tinh mo ta 1 doi tuong
+                // if(info.Principal.HasClaim(c => c,Type == ClaimTypes.Email))
+                // {
+                //     externalEmail = info.Principal.FindFirstValue(ClaimTypes.Email);
+                // }
+
+                // if(externalEmail !=null)
+                // {
+                //     externalEmail = await _userManager.FindByEmailAsync(Input.Email);
+                // }
+
+                // if((registeredUser !=null) && (externalEmailUser!=null))
+                // {
+                //     if(registeredUser.Id == externalEmailUser.Id)
+                //     {
+                //         //lien ket tai khoan, dang nhap
+
+                //         var resultLink =_userManager.AddLoginAsync(registeredUser, info);
+                //         if(resultLink.Succeeded)
+                //         {
+                //             await _signInManager.SignInAsync(registeredUser, isPersistent: false);
+                //             return LocalRedirect(returnUrl);
+                //         }
+                //     }
+                // }
+                // else
+                // {
+                //     ModelState.AddModelError(string.Empty, "khong lien ket dc tai khoan, hay su dung email khac");
+                // }
+
+                // return Content("Dung lai o day");
+
                 var user = new AppUser { UserName = Input.Email, Email = Input.Email };
 
                 var result = await _userManager.CreateAsync(user);

@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Authentication.OAuth;
 
 namespace efc
 {
@@ -74,6 +75,13 @@ namespace efc
 
             });
 
+            services.AddAuthentication().AddGoogle(options =>
+            {
+                var ggconfig = Configuration.GetSection("Authentication:Google");
+                options.ClientId= ggconfig["ClientId"];
+                options.ClientSecret = ggconfig["ClientSecret"]; 
+                options.CallbackPath = "/dang-nhap-tu-google";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -108,3 +116,5 @@ namespace efc
 }
 
 // dotnet aspnet-codegenerator identity -dc chuong.models.MyBlogContext
+//
+//g_-hkGKgT7mTH0vVAWuYtGgQ1310
