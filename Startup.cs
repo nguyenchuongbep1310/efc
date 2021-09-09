@@ -117,4 +117,3 @@ namespace efc
 
 // dotnet aspnet-codegenerator identity -dc chuong.models.MyBlogContext
 //
-//g_-hkGKgT7mTH0vVAWuYtGgQ1310
